@@ -1,10 +1,10 @@
 import React from 'react';
-import {Auth} from "./features/Auth/Auth";
+import {Router} from "./routes/Routes";
 
 export const App = () => {
   return (
     <div>
-      <Auth />
+      <Router />
     </div>
   );
 }

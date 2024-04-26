@@ -4,7 +4,7 @@ import {LoginType} from "../../common/utils/types/common-types";
 const authService = baseApi.injectEndpoints({
     endpoints: builder => {
         return {
-            login: builder.mutation<any, LoginType>({
+            login: builder.mutation<LoginResponseType, LoginType>({
                 query: (args: LoginType) => {
                     return {
                         url: `/auth/login`,
@@ -12,9 +12,16 @@ const authService = baseApi.injectEndpoints({
                         body: args
                     }
                 }
+            }),
+            me: builder.query({
+                query: () => '/auth/me'
             })
         }
     }
 })
 
-export const { useLoginMutation } = authService
+export const { useLoginMutation, useMeQuery } = authService
+
+type LoginResponseType = {
+    accessToken: string
+}

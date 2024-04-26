@@ -2,13 +2,21 @@ import React from 'react';
 import {useForm} from "react-hook-form";
 import {LoginType} from "../../common/utils/types/common-types";
 import {useLoginMutation} from "./auth.service";
+import {useNavigate} from "react-router-dom";
+import {BASE_ROUTE} from "../../routes/Routes";
 
 export const Auth = () => {
     const { register, handleSubmit, formState: { errors } } = useForm<LoginType>()
     const [ login ] = useLoginMutation()
+    const navigate = useNavigate()
 
     const onSubmit = async (data: LoginType) => {
-        await login(data)
+        try {
+            await login(data)
+            navigate(`${BASE_ROUTE}`)
+        } catch (err) {
+            console.log(err)
+        }
     }
 
     const emailRegex =
