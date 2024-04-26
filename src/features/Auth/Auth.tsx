@@ -8,7 +8,6 @@ type FromValue = {
 
 export const Auth = () => {
     const { register, handleSubmit, formState: { errors } } = useForm<FromValue>()
-    console.log('errors: ', errors)
 
     const onSubmit = (data: FromValue) => {
         console.log(data)
