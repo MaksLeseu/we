@@ -1,15 +1,11 @@
 import React from 'react';
 import {useForm} from "react-hook-form";
-
-type FromValue = {
-    loginOrEmail: string
-    password: string
-}
+import {LoginType} from "../../common/utils/types/common-types";
 
 export const Auth = () => {
-    const { register, handleSubmit, formState: { errors } } = useForm<FromValue>()
+    const { register, handleSubmit, formState: { errors } } = useForm<LoginType>()
 
-    const onSubmit = (data: FromValue) => {
+    const onSubmit = (data: LoginType) => {
         console.log(data)
     }
 
