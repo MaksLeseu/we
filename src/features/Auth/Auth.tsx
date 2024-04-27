@@ -4,6 +4,7 @@ import {LoginType} from "../../common/utils/types/common-types";
 import {useLoginMutation} from "./auth.service";
 import {useNavigate} from "react-router-dom";
 import {BASE_ROUTE} from "../../routes/Routes";
+import {setTokenToLocalStorage} from "../../common/utils/functions/localStorage/localStorage";
 
 export const Auth = () => {
     const { register, handleSubmit, formState: { errors } } = useForm<LoginType>()
@@ -12,7 +13,10 @@ export const Auth = () => {
 
     const onSubmit = async (data: LoginType) => {
         try {
-            await login(data)
+            const res = await login(data)
+            // @ts-ignore
+            const token = res.data?.accessToken
+            setTokenToLocalStorage(token)
             navigate(`${BASE_ROUTE}`)
         } catch (err) {
             console.log(err)
@@ -30,7 +34,7 @@ export const Auth = () => {
             <input
                 {...register('loginOrEmail', {
                     required: 'Email is required',
-                    pattern: { value: emailRegex, message: 'Invalid email' },
+                    pattern: { value: emailRegex, message: 'Invalid email or login' },
                 })}
                 placeholder={'Email or Username'}
             />
