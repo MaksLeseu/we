@@ -7,5 +7,5 @@ export const setTokenToLocalStorage = (accessToken: string) => {
 
 export const getTokenFromLocalStorage = () => {
     const accessToken = localStorage.getItem('accessToken')
-    return accessToken
+    return accessToken && JSON.parse(accessToken)
 }

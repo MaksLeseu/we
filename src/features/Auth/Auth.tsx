@@ -14,10 +14,13 @@ export const Auth = () => {
     const onSubmit = async (data: LoginType) => {
         try {
             const res = await login(data)
-            // @ts-ignore
-            const token = res.data?.accessToken
-            setTokenToLocalStorage(token)
-            navigate(`${BASE_ROUTE}`)
+            if ('data' in res) {
+                const token: string = res.data.accessToken
+                setTokenToLocalStorage(token)
+                navigate(`${BASE_ROUTE}`)
+            } else if ('error' in res) {
+                console.log(res.error)
+            }
         } catch (err) {
             console.log(err)
         }
