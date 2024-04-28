@@ -12,5 +12,5 @@ export const RequireAuth = () => {
 
     const isAuthenticated = !isError
 
-    return isAuthenticated ? <Outlet /> : <Navigate to={`${BASE_ROUTE}login`} />
+    return isAuthenticated ? <Outlet /> : <Navigate to={`/login`} />
 };
