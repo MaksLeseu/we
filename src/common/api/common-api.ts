@@ -1,18 +1,10 @@
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
 import {getTokenFromLocalStorage} from "../utils/functions/localStorage/localStorage";
+import {baseQueryWithReauth} from "../../features/Auth/base-query-with-reauth";
 
 export const baseApi = createApi({
     reducerPath: 'baseApi',
-    baseQuery: fetchBaseQuery({
-        baseUrl: 'http://localhost:3000',
-        prepareHeaders: (headers ) => {
-            const token = getTokenFromLocalStorage()
-            if (token) {
-                headers.set('authorization', `Bearer ${token}`)
-            }
-
-            return headers
-        },
-    }),
-    endpoints: () => ({})
+    baseQuery: baseQueryWithReauth,
+    endpoints: () => ({}),
+    tagTypes: ['Me']
 })
