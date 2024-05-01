@@ -26,9 +26,6 @@ export const Auth = () => {
         }
     }
 
-    const emailRegex =
-        /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/
-
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
             {
@@ -37,7 +34,7 @@ export const Auth = () => {
             <input
                 {...register('loginOrEmail', {
                     required: 'Email is required',
-                    pattern: { value: emailRegex, message: 'Invalid email or login' },
+                    minLength: { value: 3, message: 'Invalid email or login' },
                 })}
                 placeholder={'Email or Username'}
             />
